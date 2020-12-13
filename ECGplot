@@ -6,12 +6,19 @@ Fs=360;
 t = (0:length(ECGsignal)-1)/Fs;
 [peakamp, peaktime] = findpeaks(ECGsignal, 'MinPeakHeight', 0.2);
 heartRate = length(peakamp) * 6;
+fprintf('\n');
 fprintf('Heart rate for the given database is: %i\n', heartRate);
 
-max_val = max(ECGsignal); 
+max_val = max(ECGsignal);
+fprintf('\n');
 fprintf('Maximum value is: %i\n', max_val);
 min_val = min(ECGsignal); 
 fprintf('Minimum value is: %i\n', min_val);
+fprintf('\n');
+
+fprintf('RR intervals are: \n');
+fprintf('%i ', diff(peaktime));
+fprintf('\n');
 
 plot(t, ECGsignal);
 xlabel({'Time','(seconds)'});
