@@ -1,0 +1,109 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+int main()
+{
+int n1, n2;
+cout << "Enter Number of terms in x[n]: ";
+cin >> n1;
+//Queue creation
+queue <int> myq;
+//Creating an array of x[n] and 2D array ex[][] with given size
+int x[n1];
+int ex[n1][n1];
+//accepting terms of x[n]
+cout << "Data terms of x[n]: " << endl;
+for(int i = 0; i < n1; i++)
+{
+cin >> x[i];
+myq.push(x[i]);
+}
+//
+//ROTATION
+//
+for(int i = 0; i < n1; i++)
+{
+for(int j = 0; j < n1; j++)
+{
+ex[i][j] = myq.front();
+if(j != n1-1)
+{
+myq.push(myq.front());
+myq.pop();
+}
+}
+}
+
+cout << "Enter Number of terms in h[n]: ";
+cin >> n2;
+
+//Creating an array of h[n] with given size
+int h[n2];
+
+//accepting terms of h[n]
+cout << "Data terms in h[n]: " << endl;
+for(int i = 0; i < n2; i++)
+{
+cin >> h[i];
+}
+//Displaying terms of x[n] in matrix form
+cout << "x[n] is: [ ";
+for(int i = 0; i < n1; i++)
+{
+cout << x[i] << " ";
+}
+cout << "]" << endl;
+
+// Zero Padding for h[n]
+for(int i = n2; i < n1; i++)
+{
+h[i] = 0;
+}
+//Displaying terms of h[n] in matrix form
+cout << "h[n] is: [ ";
+for(int i = 0; i < n1; i++)
+{
+cout << h[i] << " ";
+}
+cout << "]" << endl;
+
+//printing n1xn1 array matrix
+cout << "The rotated matrix is: " << endl;
+for (int i = 0; i < n1; i++)
+{
+cout << " ";
+for(int j = 0; j < n1; j++)
+{
+cout << ex[j][i];
+//The matrix looks skewed for negative numbers
+if(ex[j][i] < 0)
+{
+cout << " ";
+}
+else
+{
+cout << " ";
+}
+}
+cout << endl;
+}
+//making a new one d array to store result
+
+int final[n1] = {0};
+//multiplication of both matrices
+for(int i = 0; i < n1; i++)
+{
+for(int j = 0; j < n1; j++)
+{
+final[i] = final[i] + ex[j][i] * h[j];
+}
+}
+//Printing final array
+cout << "Circular convolution of Matrix is: [ ";
+for(int i = 0; i < n1; i++)
+{
+cout << final[i] << " ";
+}
+cout << "]";
+return 0;
+}
